@@ -4,7 +4,6 @@ db.createCollection( "accounts",
    validator: {
       $jsonSchema: {
          bsonType: "object",
-         additionalProperties: false,
          required: [
             "username"
          ],

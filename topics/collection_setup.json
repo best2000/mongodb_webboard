@@ -4,7 +4,6 @@ db.createCollection( "topics",
    validator: {
     $jsonSchema: {
       bsonType: 'object',
-      additionalProperties: false,
       required: [
         'author',
         'createDate',
@@ -30,30 +29,35 @@ db.createCollection( "topics",
           bsonType: 'int'
         },
         tag: {
-          bsonType: 'array'
+          bsonType: 'array',
+          items: {
+            bsonType: 'objectId'
+          }
         },
         comment: {
-          bsonType: 'object',
-          additionalProperties: false,
-          required: [
-            '_id',
-            'author',
-            'createDate',
-            'content',
-            'like'
-          ],
-          properties: {
-            author: {
-              bsonType: 'objectId'
-            },
-            createDate: {
-              bsonType: 'date'
-            },
-            content: {
-              bsonType: 'string'
-            },
-            like: {
-              bsonType: 'int'
+          bsonType: 'array',
+          items: {
+            bsonType: 'object',
+            required: [
+              '_id',
+              'author',
+              'createDate',
+              'content',
+              'like'
+            ],
+            properties: {
+              author: {
+                bsonType: 'objectId'
+              },
+              createDate: {
+                bsonType: 'date'
+              },
+              content: {
+                bsonType: 'string'
+              },
+              like: {
+                bsonType: 'int'
+              }
             }
           }
         }
