@@ -1,2 +1,2 @@
 # mongodb_webboard
-THIS IS JUST A DATABASE!
+This is just a DATABASE ONLY!
