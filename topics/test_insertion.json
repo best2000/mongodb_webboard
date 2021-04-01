@@ -1,0 +1,9 @@
+//insert records
+db.topics.insert({
+    author: ObjectId("6066097e932e5e13121fdbfe"),
+    createDate: ObjectId().getTimestamp(),
+    title: "Ma firstt time.",
+    content: "hehe...",
+    like: NumberInt(0),
+    tag: [ObjectId("6065fce49171ee86379f21eb")]
+})

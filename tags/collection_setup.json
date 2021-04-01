@@ -1,0 +1,27 @@
+//create 'tags' collection and set validations
+db.createCollection( "tags",
+{
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         additionalProperties: false,
+         required: [
+            "tagname"
+         ],
+         properties: {
+            tagname: {
+               bsonType: "string",
+            },
+         }
+      }
+   }
+} )
+
+//setup unique index "tagname"
+db.tags.createIndex(
+{
+   "tagname": "text"
+},
+{
+   unique: true,
+} )

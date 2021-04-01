@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "6065f13d9171ee86379f21e6"
+  },
+  "username": "firstguy"
+},{
+  "_id": {
+    "$oid": "6065f13d9171ee86379f21e7"
+  },
+  "username": "secguy"
+},{
+  "_id": {
+    "$oid": "6066097e932e5e13121fdbfe"
+  },
+  "username": "best2000"
+},{
+  "_id": {
+    "$oid": "6066099c932e5e13121fdc00"
+  },
+  "username": "best1605"
+}]

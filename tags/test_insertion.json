@@ -1,0 +1,18 @@
+//insert records
+db.tags.insertMany([
+    {
+    tagname: "movies"
+    },
+    {
+    tagname: "education"
+    },
+    {
+    tagname: "life"
+    },
+    {
+    tagname: "religion"
+    },
+    {
+    tagname: "animal"
+    }
+])

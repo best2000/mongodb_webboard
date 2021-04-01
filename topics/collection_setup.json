@@ -1,0 +1,64 @@
+//create 'topics' collection and set validations
+db.createCollection( "topics",
+{
+   validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      additionalProperties: false,
+      required: [
+        'author',
+        'createDate',
+        'title',
+        'content',
+        'like',
+        'tag'
+      ],
+      properties: {
+        author: {
+          bsonType: 'objectId'
+        },
+        createDate: {
+          bsonType: 'date'
+        },
+        title: {
+          bsonType: 'string'
+        },
+        content: {
+          bsonType: 'string'
+        },
+        like: {
+          bsonType: 'int'
+        },
+        tag: {
+          bsonType: 'array'
+        },
+        comment: {
+          bsonType: 'object',
+          additionalProperties: false,
+          required: [
+            '_id',
+            'author',
+            'createDate',
+            'content',
+            'like'
+          ],
+          properties: {
+            author: {
+              bsonType: 'objectId'
+            },
+            createDate: {
+              bsonType: 'date'
+            },
+            content: {
+              bsonType: 'string'
+            },
+            like: {
+              bsonType: 'int'
+            }
+          }
+        }
+      }
+    }
+  }
+} )
+

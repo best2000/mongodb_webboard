@@ -1,0 +1,21 @@
+  "account": {
+    "_id": ObjectID,
+    "username": String
+  },
+  "topic": {
+    "_id": ObjectID,
+    "author": ObjectID,
+    "createDate": Date,
+    "title": String,
+    "description": String,
+    "like": Int,
+    "tag": ["String"],
+    "comment":[
+      {
+        "author": ObjectID,
+        "createDate": Date,
+        "content": String,
+        "like": Int
+      }
+    ]
+  }

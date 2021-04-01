@@ -1,0 +1,9 @@
+//insert records
+db.accounts.insertMany([
+    {
+    username: "firstguy"
+    },
+    {
+    username: "secguy"
+    }
+])

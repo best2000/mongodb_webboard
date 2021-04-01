@@ -1,0 +1,27 @@
+//create 'accounts' collection and set validations
+db.createCollection( "accounts",
+{
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         additionalProperties: false,
+         required: [
+            "username"
+         ],
+         properties: {
+            username: {
+               bsonType: "string",
+            }
+         }
+      }
+   }
+} )
+
+//setup unique index "username"
+db.accounts.createIndex(
+{
+   "username": "text"
+},
+{
+   unique: true,
+} )
