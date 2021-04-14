@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.multiselect {
+    width: 200px;
+  }
+  
+  .selectBox {
+    position: relative;
+  }
+  
+  .selectBox select {
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  #checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+  }
+  
+  #checkboxes label {
+    display: block;
+  }
+  
+  #checkboxes label:hover {
+    background-color: #1e90ff;
+  }
+</style>
+
+    <h2>Create Topic</h2>
+    <form method="POST" action="{% url 'create_topic' %}">
+        {% csrf_token %}
+
+        <ul>
+            <p>Title</p>
+            <textarea style="font-size: 12pt" rows="4" cols="50" name="title" ></textarea>
+            <p>Content</p>
+            <textarea style="font-size: 12pt" rows="4" cols="50" name="content"></textarea>
+            <br>
+
+            <p>Tag</p>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                  <select>
+                    <option>Select tags</option>
+                  </select>
+                  <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                  {% for tag in all_tags %}
+
+                    <label for="{{ tag }}">
+                        <input type="checkbox" id="{{ tag }}" name="tags" value="{{ tag }}" />{{ tag }}
+                    </label>
+
+                  {% endfor %}
+                </div>
+              </div>
+
+            <br>
+        </ul>
+
+        <button type="submit" class="btn btn-success">Create</button>
+    </form>
+
+<script>
+    var expanded = false;
+    
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+        } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+        }
+    }
+</script>
+{% endblock %}

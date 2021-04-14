@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'create_topic' %}">
+        <h1>Tag {{ tag }}</h1>
+        <input type="submit" class="btn btn-success" value="Create Topic" />
+    </form>
+</div>
+
+<div class="container">
+    <br>
+    <ul class="list-group">
+        {% for item , user_create in zip_topic_user %}
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p>By {{ item.user_name }} - {{user_create.date}}</p>
+                    <a href="{% url 'view_topic' item.topicid %}" class="btn btn-primary">See More</a>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </ul>
+</div>
+
+    
+{% endblock %}

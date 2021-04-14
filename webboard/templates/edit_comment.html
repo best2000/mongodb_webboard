@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card w-100">
+    <div class="card-body">
+
+        <h1>{{select_topic}}</h1>
+        <ul>{{select_topic.content}}</ul>
+        <hr>
+
+        {% if user_like|striptags == user.username|striptags %}
+            <a class="btn btn-outline-primary" href="{% url 'unlike_topic' select_topic.topicid %}">Unlike</a>
+            - {{ select_topic.like }} Likes
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'like_topic' select_topic.topicid %}">Like</a>
+            - {{ select_topic.like }} Likes
+        {% endif %}
+
+        <div style="float: right;">
+                <p>By : {{ select_topic.user_name }}
+                {% if user.is_authenticated %}
+                    {% if user.username|striptags == select_topic.user_name|striptags %}
+                    (
+                        <a href="{% url 'edit_topic' select_topic.topicid %}">Edit</a>
+                    |
+                        <a href="{% url 'delete_topic' select_topic.topicid %}">Delete</a>
+                    )
+                        <p style="text-align:right;">asked : {{time_create_topic.date}}</p>
+                    {% endif %}
+                {% endif %}
+                </p> 
+        </div>
+    </div>
+</div>
+    <br>
+
+    <strong>Comment</strong><br>
+    
+    <ul>
+        {% for comment, user_like in zip_com_user %}
+            <div class="card w-100">
+                <div class="card-body">
+                    <p>{{ comment.content }}</p>
+                    <hr>
+                    {% if user_like %}
+                        <a class="btn btn-outline-primary" href="{% url 'unlike_comment' comment.commentid %}">Unlike</a>
+                        - {{ comment.like }} Likes
+                    {% else %}
+                        <a class="btn btn-primary" href="{% url 'like_comment' comment.commentid %}">Like</a>
+                        - {{ comment.like }} Likes
+                    {% endif %}
+
+                    <div style="float: right;">
+                        <p>By : {{comment.comuserid}}
+                        {% if user.is_authenticated %}
+                            {% if user.username|striptags == comment.comuserid|striptags %}
+                            (
+                                <a href="{% url 'edit_comment' comment.commentid %}">Edit</a>
+                            |
+                                <a href="{% url 'delete_comment' comment.commentid %}">Delete</a>
+                            )
+                                <br>
+                            {% endif %}
+                        {% endif %}
+                        </p>
+                        <p style="text-align:right;">answered : {{comment.date}}</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}     
+    </ul>
+    <br>
+
+    <h4>Edit Comment</h4>
+    <ul>
+        <form method="POST" action="{% url 'edit_comment' select_comment.commentid %}">
+            {% csrf_token %}
+            <textarea style="font-size: 12pt" rows="4" cols="50" name="content">{{select_comment.content}}</textarea>
+            <br>
+
+            <button type="submit" class="btn btn-success">Done</button>
+        </form>
+    </ul>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+{% block content %}
+
+    <form action="{% url 'create_topic' %}">
+        <h1>All Topic</h1>
+        <input type="submit" class="btn btn-success" value="Create Topic" />
+    </form>
+    <br>
+</div>
+
+    <div class="container">
+        <h5>Tags</h5>
+        {% for tag in all_tags %}
+            <a href="{% url 'show_tag' tag %}" class="btn btn-outline-secondary">{{ tag }}</a> 
+        {% endfor %}
+    </div>
+    
+<div class="container">
+    <br>
+    <ul class="list-group">
+        {% for item , user_create in zip_topic_user %}
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p>By {{ item.user_name }} - {{user_create.date}}</p>
+                    <a href="{% url 'view_topic' item.topicid %}" class="btn btn-primary">See More</a>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </ul>
+</div>
+
+    
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Edit Topic</h2>
+
+    <form method="POST" action="{% url 'edit_topic' select_topic.topicid %}">
+        {% csrf_token %}
+        <ul>
+            <h4>Title</h4>
+            <textarea style="font-size: 12pt" rows="4" cols="50" name="title" >{{ select_topic.title }}</textarea>
+            <h4>Content</h4>
+            <textarea style="font-size: 12pt" rows="4" cols="50" name="content">{{ select_topic.content }}</textarea>
+            <br>
+            <button type="submit" class="btn btn-success">Done</button>
+        </ul>
+    </form>
+{% endblock %}
